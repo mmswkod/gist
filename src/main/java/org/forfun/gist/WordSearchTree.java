@@ -6,7 +6,9 @@ import java.util.Queue;
 public class WordSearchTree {
 
 	protected Node root;
+	private int N;
 
+	
 	private class Node {
 		private String word;
 		private char c;
@@ -14,7 +16,18 @@ public class WordSearchTree {
 		
 	}
 
+	// return number of key-value pairs
+    public int size() {
+        return N;
+    }
+    
+    public boolean contains(String key) {
+        return get(key) != null;
+    }
+    
 	public void add(String word) {
+		if(word == null || word.length() == 0) throw new RuntimeException("Just non null word");
+		if (!contains(word)) N++;
 		root = add(root, word, 0);
 	}
 
@@ -42,6 +55,7 @@ public class WordSearchTree {
 	}
 
 	public String get(String key) {
+		if (key == null || key.length() == 0) throw new RuntimeException("illegal key");
 		Node x = get(root, key, 0);
 		if (x == null)
 			return null;
@@ -82,6 +96,7 @@ public class WordSearchTree {
 	public Iterable<String> keysWithPrefix(String prefix) {
 		Queue<String> queue = new PriorityQueue<String>();
 		Node x = get(root, prefix, 0);
+		if(x == null) return null;
 		collect(x.mid, queue);
 		return queue;
 

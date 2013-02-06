@@ -8,3 +8,5 @@
 *.prefs
 
 *.class
+
+target/classes/words.txt
