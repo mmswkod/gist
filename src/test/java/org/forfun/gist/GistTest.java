@@ -21,16 +21,16 @@ public class GistTest {
 	@Test
 	public void testMathSimilarity() {
 		Assert.assertNotNull(gist);
-		List<String> words = gist.mathSimilarity("sandwich", 1);
+		List<String> words = gist.matchSimilarity("sandwich", 1);
 		Assert.assertEquals("sandwich", words.get(0));
 		
-		words = gist.mathSimilarity("sheeeeep", 1);
+		words = gist.matchSimilarity("sheeeeep", 1);
 		Assert.assertEquals("sheppey", words.get(0));
 				
-		words = gist.mathSimilarity("shej", 1);
+		words = gist.matchSimilarity("shej", 1);
 		Assert.assertEquals("she", words.get(0));
 		
-		words = gist.mathSimilarity("CUNsperrICY", 1);
+		words = gist.matchSimilarity("CUNsperrICY", 1);
 		Assert.assertEquals("conspiracy", words.get(0));
 
 	}
@@ -38,7 +38,7 @@ public class GistTest {
 	@Test
 	public void testMathSimilarityNoSuggestion() {
 		Assert.assertNotNull(gist);
-		List<String> words = gist.mathSimilarity("12shej", 1);
+		List<String> words = gist.matchSimilarity("12shej", 1);
 		Assert.assertEquals("NO SUGGESTION", words.get(0));
 
 	}

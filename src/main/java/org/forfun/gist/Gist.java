@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.List;
 
-import org.forfun.gist.similarity.StringSimilarity;
 import org.forfun.gist.similarity.StringSimilarityFactory;
 import org.forfun.gist.similarity.util.StringUtil;
 
@@ -31,16 +30,27 @@ public class Gist {
 
 	}
 
+	/**
+	 * Create a gist using a dict provided by inputstream
+	 * @param is
+	 * @return
+	 * @throws IOException
+	 */
 	public static Gist create(InputStream is) throws IOException {
 		return new Gist(is);
 	}
 
-	public List<String> mathSimilarity(String s, int top) {
+	/**
+	 * Return the number of string that match the similarity in s 
+	 * @param s 
+	 * @param top number of strings returned
+	 * @return
+	 */
+	public List<String> matchSimilarity(String s, int top) {
 
 		String key = wst.get(s);
 		if(key != null) return Arrays.asList(key);
-		
-		StringSimilarity similarity = StringSimilarityFactory.create();
+				
 		s = StringUtil.removeDuplicated(s.toLowerCase());
 		Iterable<String> words = wst.keysWithPrefix(s);
 		
@@ -53,8 +63,8 @@ public class Gist {
 		}
 		
 		if(words == null) return Arrays.asList("NO SUGGESTION");
-		
-		return similarity.similarities(s, words, top);
+				
+		return StringSimilarityFactory.create().similarities(s, words, top);
 	}
 
 	

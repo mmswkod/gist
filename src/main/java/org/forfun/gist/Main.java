@@ -7,6 +7,8 @@ import java.util.Scanner;
 
 public class Main {
 
+	private static final String EXIT = "exit";
+
 	/**
 	 * @param args
 	 * @throws IOException 
@@ -20,9 +22,9 @@ public class Main {
 		List<String> words;
 		System.out.println("Type a word (exit to leave the app)");
 		System.out.println("> ");
-		while (sc.hasNext() && !"exit".equals(cmd)) {
+		while (sc.hasNext() && !EXIT.equals(cmd)) {
 			cmd = checkExit(sc.next());
-			words = gist.mathSimilarity(cmd, 1);
+			words = gist.matchSimilarity(cmd, 1);
 			System.out.println("> "+words.get(0));
 			System.out.println("> ");
 		}		
@@ -31,7 +33,7 @@ public class Main {
 	}
 
 	private static String checkExit(String cmd) {
-		if ("exit".equals(cmd)) {
+		if (EXIT.equals(cmd)) {
 			System.out.println("Goodbye!!!");
 			System.exit(0);
 		}

@@ -3,6 +3,11 @@ package org.forfun.gist;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+/**
+ * 
+ * It is a Ternary Search Trie
+ *
+ */
 public class WordSearchTree {
 
 	protected Node root;

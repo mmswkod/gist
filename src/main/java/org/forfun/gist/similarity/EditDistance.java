@@ -1,6 +1,5 @@
 package org.forfun.gist.similarity;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -25,6 +24,12 @@ class EditDistance implements StringSimilarity {
 		
 	}
 	
+
+	/**
+	 * Find the similarities using Levenshtein algorithm. Compare s against each word in words
+	 * and returns the amount defined in top. It uses a min heap(priority queue) behind the scenes
+	 * to store the words with min cost for Levenshtein transformation.
+	 */
 	public List<String> similarities(String s, Iterable<String> words, int top) {
 		if (s == null || words == null) {
 			throw new IllegalArgumentException("Can not deal with null strings");
