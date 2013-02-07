@@ -55,7 +55,7 @@ public class WordSearchTreeTest {
 	@Test
 	public void testKeysWithPrefixThatIsNotPresent() {
 		Iterable<String> words = st.keysWithPrefix("t");
-		Assert.assertFalse(words.iterator().hasNext());
+		Assert.assertNull(words);
 	}
 
 	@Test

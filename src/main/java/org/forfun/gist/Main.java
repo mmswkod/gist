@@ -18,7 +18,7 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		String cmd = "";
 		List<String> words;
-		System.out.println("Type a word");
+		System.out.println("Type a word (exit to leave the app)");
 		System.out.println("> ");
 		while (sc.hasNext() && !"exit".equals(cmd)) {
 			cmd = checkExit(sc.next());
