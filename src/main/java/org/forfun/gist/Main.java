@@ -17,12 +17,16 @@ public class Main {
 		
 		Scanner sc = new Scanner(System.in);
 		String cmd = "";
+		List<String> words;
+		System.out.println("Type a word");
+		System.out.println("> ");
 		while (sc.hasNext() && !"exit".equals(cmd)) {
 			cmd = checkExit(sc.next());
-		}
+			words = gist.mathSimilarity(cmd, 1);
+			System.out.println("> "+words.get(0));
+			System.out.println("> ");
+		}		
 		
-		String s = null;
-		List<String> words = gist.mathSimilarity(s, 1);
 
 	}
 

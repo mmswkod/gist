@@ -5,5 +5,5 @@ public class StringSimilarityFactory {
 	public static StringSimilarity create() {		
 		return new EditDistance();
 	}
-
+	
 }

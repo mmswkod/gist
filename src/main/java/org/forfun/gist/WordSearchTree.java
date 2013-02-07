@@ -8,7 +8,6 @@ public class WordSearchTree {
 	protected Node root;
 	private int N;
 
-	
 	private class Node {
 		private String word;
 		private char c;
@@ -64,7 +63,7 @@ public class WordSearchTree {
 	}
 
 	private Node get(Node x, String key, int d) {
-		if (x == null)
+		if (x == null || Character.isDigit(key.charAt(d)))
 			return null;
 		char c = key.charAt(d);
 		if (c < x.c)
@@ -75,10 +74,6 @@ public class WordSearchTree {
 			return get(x.mid, key, d + 1);
 		else
 			return x;
-	}
-
-	public void delete(String key) {
-		throw new RuntimeException("Opss not implemented..");
 	}
 
 	private void collect(Node x,  Queue<String> q) {

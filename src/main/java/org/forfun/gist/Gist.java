@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.forfun.gist.similarity.StringSimilarity;
 import org.forfun.gist.similarity.StringSimilarityFactory;
+import org.forfun.gist.similarity.util.StringUtil;
+
 
 public class Gist {
 
@@ -23,9 +25,8 @@ public class Gist {
 		BufferedReader bf = new BufferedReader(new InputStreamReader(is));
 
 		String word;
-
 		while ((word = bf.readLine()) != null) {
-			wst.add(word);
+			wst.add(word.toLowerCase());
 		}
 
 	}
@@ -37,16 +38,25 @@ public class Gist {
 	public List<String> mathSimilarity(String s, int top) {
 
 		String key = wst.get(s);
-		if(key != null) return Arrays.asList("key");		
+		if(key != null) return Arrays.asList(key);
 		
 		StringSimilarity similarity = StringSimilarityFactory.create();
-		s = correctSpellingMistakes(s);		
-		return similarity.similarities(s, wst.keysWithPrefix(s), top);
+		s = StringUtil.removeDuplicated(s.toLowerCase());
+		Iterable<String> words = wst.keysWithPrefix(s);
+		
+		int count = 0;
+		String prefix = new String(s.substring(0, ++count));
+		while(words == null && s.length() > 0 && count < s.length()){			
+			words = wst.keysWithPrefix(prefix);
+			prefix = new String(s.substring(0, ++count));
+			
+		}
+		
+		if(words == null) return Arrays.asList("NO SUGGESTION");
+		
+		return similarity.similarities(s, words, top);
 	}
 
-	private String correctSpellingMistakes(String s) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
+	
 }

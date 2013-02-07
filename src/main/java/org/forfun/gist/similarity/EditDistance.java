@@ -34,9 +34,8 @@ class EditDistance implements StringSimilarity {
 			throw new IllegalArgumentException("At least one suggestion should desired");
 		}
 
-		PriorityQueue<CostSimilarity> queue = new PriorityQueue<>(top, new Comparator<CostSimilarity>() {
-
-			@Override
+		PriorityQueue<CostSimilarity> queue = new PriorityQueue<CostSimilarity>(top, new Comparator<CostSimilarity>() {
+			
 			public int compare(CostSimilarity o1, CostSimilarity o2) {				
 				if(o1.cost == o2.cost) return 0;
 				

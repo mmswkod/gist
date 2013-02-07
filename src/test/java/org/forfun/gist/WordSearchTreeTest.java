@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.List;
 
 import org.forfun.gist.similarity.StringSimilarity;
@@ -34,7 +33,7 @@ public class WordSearchTreeTest {
 
 	@Test
 	public void testIsThere() {
-		Assert.assertTrue(st.isThere("matter"));
+		Assert.assertTrue(st.contains("matter"));
 	}
 
 	@Test(expected=RuntimeException.class)
@@ -49,12 +48,14 @@ public class WordSearchTreeTest {
 		
 		String pelican = st.get("pelican");
 		Assert.assertEquals("pelican", pelican);
+		
+		Assert.assertEquals(null, st.get("shee"));
 	}
 
 	@Test
 	public void testKeysWithPrefixThatIsNotPresent() {
 		Iterable<String> words = st.keysWithPrefix("t");
-		Assert.assertNull(words);
+		Assert.assertFalse(words.iterator().hasNext());
 	}
 
 	@Test
@@ -82,6 +83,24 @@ public class WordSearchTreeTest {
 
 	}
 
+	
+	@Test
+	public void testKeys() throws IOException{
+		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("words.txt");
+
+		BufferedReader bf = new BufferedReader(new InputStreamReader(is));
+
+		WordSearchTree wst = new WordSearchTree();
+		String word;
+
+		while ((word = bf.readLine()) != null) {
+			wst.add(word);
+		}
+				
+		
+
+	}
+
 	@Test
 	public void testPrefix() throws IOException{
 		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("words.txt");
@@ -102,5 +121,24 @@ public class WordSearchTreeTest {
 		System.out.println(ww);
 
 	}
+	
+	@Test
+	public void testNotKey() throws IOException{
+		InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream("words.txt");
+
+		BufferedReader bf = new BufferedReader(new InputStreamReader(is));
+
+		WordSearchTree wst = new WordSearchTree();
+		String word;
+
+		while ((word = bf.readLine()) != null) {
+			wst.add(word);
+		}
+		
+		Assert.assertNotNull(wst.get("shee"));
+		Assert.assertNull(wst.get("shej"));
+
+	}
+
 
 }
